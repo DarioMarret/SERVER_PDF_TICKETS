@@ -1,0 +1,8 @@
+{
+  "host"                 : "45.224.96.56",
+  "user"                 : "root",
+  "password"             : "root",
+  "database"             : "tikect",
+  "waitForConnections"   : true,
+  "connectionLimit"      : 10
+}
