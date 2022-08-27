@@ -15,7 +15,7 @@ export const GenaradorPdrQR = async (req, reply) => {
     let options = { format: 'A4' };
     let file = { url: `https://rec.netbot.ec/pdf/${base64encode(JSON.stringify(req.body))}` };
     html_to_pdf.generatePdf(file, options).then(pdfBuffer => {
-        fs.writeFileSync(path.join(__dirname, `../public/tickets/${req.body.protocol}-${req.body.protocol}-${nano}.pdf`), pdfBuffer);
+        fs.writeFileSync(path.join(__dirname, `../public/tickets/${req.body.protocol}-${nano}.pdf`), pdfBuffer);
     });
     const link = `${process.env.DOMINIO}/tickets/${req.body.protocol}-${nano}.pdf`
     const qr = `${req.body.nombre}-${req.body.cedula}-${req.body.celular}-${req.body.protocol}-${req.body.actual}`
