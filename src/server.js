@@ -1,3 +1,4 @@
+import fs from 'fs'
 import 'dotenv/config'
 import path from 'path'
 import Fastify from 'fastify'
@@ -47,10 +48,10 @@ const start = async () => {
         await fastify.listen({ port: process.env.PORT, host: process.env.HOST || '' })
         await fastify.swagger();
         console.log(`server listening on ${process.env.PORT}`);
-        let exite = fs.existsSync('./public')
+        let exite = fs.existsSync('../public')
         if (!exite) {
-            fs.mkdirSync('public', { recursive: true })
-            fs.mkdirSync('public/tickets', { recursive: true })
+            fs.mkdirSync('../public', { recursive: true })
+            fs.mkdirSync('../public/tickets', { recursive: true })
             console.log("se crear directorio")
         }else{
             console.log("directorio existe")
