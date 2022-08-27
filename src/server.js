@@ -47,6 +47,14 @@ const start = async () => {
         await fastify.listen({ port: process.env.PORT, host: process.env.HOST || '' })
         await fastify.swagger();
         console.log(`server listening on ${process.env.PORT}`);
+        let exite = fs.existsSync('./public')
+        if (!exite) {
+            fs.mkdirSync('public', { recursive: true })
+            fs.mkdirSync('public/tickets', { recursive: true })
+            console.log("se crear directorio")
+        }else{
+            console.log("directorio existe")
+        }
     } catch (err) {
         fastify.log.error(err);
         process.exit(1);
