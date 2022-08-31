@@ -1,7 +1,7 @@
 {
-  "host"                 : "45.224.96.56",
+  "host"                 : "localhost",
   "user"                 : "root",
-  "password"             : "root",
+  "password"             : "sp202ghtsqb.qwdhg.",
   "database"             : "tikect",
   "waitForConnections"   : true,
   "connectionLimit"      : 10
