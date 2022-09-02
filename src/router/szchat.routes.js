@@ -8,7 +8,7 @@ const routes = [
         handler: GenaradorPdrQR
     },
     {
-        path: '/api/v1/cedula:cedula',
+        path: '/api/v1/cedula/:cedula',
         method: 'GET',
         schema: {
             params: {
