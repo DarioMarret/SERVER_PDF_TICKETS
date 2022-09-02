@@ -6,6 +6,7 @@ import moment from "moment"
 import path from 'path'
 import 'dotenv/config'
 import fs from 'fs'
+import axios from 'axios'
 moment.locale("es")
 
 
@@ -29,4 +30,16 @@ export const GenaradorPdrQR = async (req, reply) => {
 async function GuardarDatos(nombre, cedula, celular, protocol, actual, qr, link, nombreconcert){
     let query = `INSERT INTO generados_tickets (nombre, cedula, celular, protocol, actual, qr, link, nombreconcert) VALUES ('${nombre}', '${cedula}', '${celular}', '${protocol}', '${actual}', '${qr}', '${link}', '${nombreconcert}')`;
     await conexion.query(query)
+}
+
+export const consultarCedula = async (req, reply) => {
+    try {
+        const { data } = await axios.get(`https://turnos.manta.gob.ec/consultacedula/${req.params.cedula}`)
+        reply.send(data)
+    } catch (error) {
+        reply.send({
+            success: false,
+            message: "Error al consultar cedula"
+        })        
+    }
 }
