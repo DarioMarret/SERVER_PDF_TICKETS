@@ -4,6 +4,7 @@ import path from 'path'
 import Fastify from 'fastify'
 import swagger from "./utils/swagger"
 import Szchat from './router/szchat.routes'
+import Fastifycors from "@fastify/cors"
 
 const fastify = Fastify({
     logger: {
@@ -13,6 +14,7 @@ const fastify = Fastify({
 
 
 fastify.register(require("@fastify/swagger"), swagger.options)
+fastify.register(Fastifycors, {})
 
 fastify.register(require('@fastify/static'), {
     root: path.join(__dirname, './public/tickets'),
