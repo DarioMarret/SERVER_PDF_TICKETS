@@ -20,15 +20,16 @@ export const GenaradorPdrQR = async (req, reply) => {
     });
     const link = `${process.env.DOMINIO}/tickets/${req.body.protocol}-${nano}.pdf`
     const qr = `${req.body.nombre}-${req.body.cedula}-${req.body.celular}-${req.body.protocol}-${req.body.actual}`
-    await GuardarDatos(req.body.nombre, req.body.cedula, req.body.celular, req.body.protocol, req.body.actual, qr, link, req.body.nombreconcert)
+    await GuardarDatos(req.body.nombre, req.body.cedula, req.body.celular, req.body.protocol, req.body.actual, qr, link, req.body.nombreconcert, req.body.cuidadconcert)
     reply.send({
         success: true,
         url:link
     });
 }
 
-async function GuardarDatos(nombre, cedula, celular, protocol, actual, qr, link, nombreconcert){
-    let query = `INSERT INTO generados_tickets (nombre, cedula, celular, protocol, actual, qr, link, nombreconcert) VALUES ('${nombre}', '${cedula}', '${celular}', '${protocol}', '${actual}', '${qr}', '${link}', '${nombreconcert}')`;
+async function GuardarDatos(nombre, cedula, celular, protocol, actual, qr, link, nombreconcert, cuidadconcert) {
+    let query = `INSERT INTO generados_tickets (nombre, cedula, celular, protocol, actual, qr, link, nombreconcert, cuidadconcert) 
+    VALUES ('${nombre}', '${cedula}', '${celular}', '${protocol}', '${actual}', '${qr}', '${link}', '${nombreconcert}', '${cuidadconcert}')`;
     await conexion.query(query)
 }
 
