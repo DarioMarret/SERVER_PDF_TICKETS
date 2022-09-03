@@ -1,3 +1,4 @@
+import { conexion } from "../database/Conexion";
 
 
 export const FormularioPreRegistro = async (req, reply) => {
