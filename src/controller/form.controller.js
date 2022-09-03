@@ -13,7 +13,8 @@ export const FormularioPreRegistro = async (req, reply) => {
     } catch (error) {
         reply.send({
             success: false,
-            message: "Error al guardar datos"
+            message: "Error al guardar datos",
+            error: error
         })
     }
 }
