@@ -23,8 +23,6 @@ export const GenaradorPdrQR = async (req, reply) => {
         const link = `${process.env.DOMINIO}/tickets/${req.body.protocol}-${nano}.pdf`
         const qr = `${req.body.nombre}-${req.body.cedula}-${req.body.celular}-${req.body.protocol}-${req.body.actual}`
         await GuardarDatos(req.body.nombre, req.body.cedula, req.body.celular, req.body.protocol, req.body.actual, qr, link, req.body.nombreconcert, req.body.cuidadconcert, req.body)
-        const delay = time => new Promise(resolveCallback => setTimeout(resolveCallback, time));
-        await delay(3000)
         reply.send({
             success: true,
             url: link
