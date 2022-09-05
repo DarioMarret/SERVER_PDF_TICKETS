@@ -50,7 +50,7 @@ async function GenerarPdfQR(body) {
 
 }
 
-async function GuardarDatos(nombre, cedula, celular, protocol, actual, qr, link, nombreconcert, cuidadconcert) {
+async function GuardarDatos(nombre, cedula, celular, protocol, actual, qr, link, nombreconcert, cuidadconcert, body) {
     let query = `INSERT INTO generados_tickets (nombre, cedula, celular, protocol, actual, qr, link, nombreconcert, cuidadconcert,body) 
     VALUES ('${nombre}', '${cedula}', '${celular}', '${protocol}', '${actual}', '${qr}', '${link}', '${nombreconcert}', '${cuidadconcert}','${JSON.stringify(body)}')`;
     await conexion.query(query)
