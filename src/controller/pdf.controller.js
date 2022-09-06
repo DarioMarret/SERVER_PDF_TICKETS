@@ -13,11 +13,6 @@ moment.locale("es")
 export const GenaradorPdrQR = async (req, reply) => {
     var nano = Number(new NanoDate(moment().format("YYYY-MM-DD HH:mm:ss")).getTime())
 
-    // let options = { format: 'A4' };
-    // let file = { url: `https://rec.netbot.ec/pdf/${base64encode(JSON.stringify(req.body))}` };
-    // html_to_pdf.generatePdf(file, options).then(pdfBuffer => {
-    //     fs.writeFileSync(path.join(__dirname, `../public/tickets/${req.body.protocol}-${nano}.pdf`), pdfBuffer);
-    // });
     const generadorQR = await GenerarPdfQR(req.body)
     if (generadorQR) {
         const link = `${process.env.DOMINIO}/tickets/${req.body.protocol}-${nano}.pdf`
