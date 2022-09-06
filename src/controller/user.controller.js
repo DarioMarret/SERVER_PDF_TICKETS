@@ -52,7 +52,7 @@ export const ObtenerUsuarios = async (req, reply) => {
 export const ActualizarUsuario = async (req, reply) => {
     try {
         const { id, username, new_password, perfil } = req.body;
-        if(new_password != ""){
+        if (new_password != "") {
             const hash = await hashPassword(new_password);
             const usuario = await conexion.query(
                 `UPDATE admin SET username = ?, password = ?, perfil = ? WHERE id = ?`,
@@ -69,7 +69,7 @@ export const ActualizarUsuario = async (req, reply) => {
                     message: "Usuario actualizado correctamente",
                 });
             }
-        }else{
+        } else {
             const usuario = await conexion.query(
                 `UPDATE admin SET username = ?, perfil = ? WHERE id = ?`,
                 [username, perfil, id]
@@ -120,26 +120,19 @@ export const LoginAdmin = async (req, reply) => {
             message: "Error al iniciar sesion"
         });
     } else {
-        if (response[0][0].enable != 0) {
+        const x = await comparePassword(password, response[0][0].password)
+        if (x) {
+            delete response[0][0].password
+            var token = jwt.sign(response[0][0], 'speed', { expiresIn: '1h' });
+            reply.send({
+                success: true,
+                data: token
+            });
+        } else {
             reply.send({
                 success: false,
-                message: "Cuenta deshabilitada"
+                message: "Error al iniciar sesion"
             });
-        }else{
-            const x = await comparePassword(password, response[0][0].password)
-            if (x) {
-                delete response[0][0].password
-                var token = jwt.sign(response[0][0], 'speed', { expiresIn: '1h'});
-                reply.send({
-                    success: true,
-                    data:token
-                });
-            }else{
-                reply.send({
-                    success: false,
-                    message: "Error al iniciar sesion"
-                });
-            }
         }
     }
 }
