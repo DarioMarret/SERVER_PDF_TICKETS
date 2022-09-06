@@ -1,5 +1,5 @@
 import { FormularioPreRegistro } from "../controller/form.controller";
-import { consultarCedula, GenaradorPdrQR } from "../controller/pdf.controller";
+import { consultarCedula, GenaradorPdrQR, listarRegistroTickets } from "../controller/pdf.controller";
 
 
 const routes = [
@@ -40,6 +40,19 @@ const routes = [
             }
         },
         handler: FormularioPreRegistro
+    },
+    {
+        path: '/api/v1/szchat/listar/:nombreconcert',
+        method: 'GET',
+        schema: {
+            params: {
+                type: 'object',
+                properties: {
+                    nombre: { type: 'string' }
+                }
+            }
+        },
+        handler: listarRegistroTickets
     }
 ]
 

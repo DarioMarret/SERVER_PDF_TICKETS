@@ -60,3 +60,29 @@ export const consultarCedula = async (req, reply) => {
         })
     }
 }
+
+export const listarRegistroTickets = async (req, reply) => {
+    try {
+        const { nombreconcert } = req.params
+        if (nombreconcert.length === 0) {
+            let query = `SELECT * FROM generados_tickets`;
+            const data = await conexion.query(query)
+            reply.send({
+                success: true,
+                data: data[0]
+            })
+        } else {
+            let query = `SELECT * FROM generados_tickets WHERE nombreconcert = '${nombreconcert}'`;
+            const data = await conexion.query(query)
+            reply.send({
+                success: true,
+                data: data[0]
+            })
+        }
+    } catch (error) {
+        reply.send({
+            success: false,
+            message: "Error "+error
+        })
+    }
+}
