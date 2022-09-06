@@ -4,6 +4,7 @@ import path from 'path'
 import Fastify from 'fastify'
 import swagger from "./utils/swagger"
 import Szchat from './router/szchat.routes'
+import Users from './router/user.routes'
 import Fastifycors from "@fastify/cors"
 
 const fastify = Fastify({
@@ -29,6 +30,9 @@ fastify.register(async fastify => {
     })
 
     Szchat.forEach(route => {
+        fastify.route(route)
+    });
+    Users.forEach(route => {
         fastify.route(route)
     });
 
