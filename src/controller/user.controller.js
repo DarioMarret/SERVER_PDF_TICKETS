@@ -11,7 +11,7 @@ export const GuardarUsuario = async (req, reply) => {
         const hash = await hashPassword(password);
         let fechaCracion = moment().format("YYYY-MM-DD HH:mm:ss");
         const usuario = await conexion.query(
-            `INSERT INTO admin (username, password, perfil, fecha_creacio) VALUES (?, ?, ?, ?)`,
+            `INSERT INTO admin (username, password, perfil, fecha_creacion) VALUES (?, ?, ?, ?)`,
             [username, hash, perfil, fechaCracion]
         );
         if (!usuario) {
