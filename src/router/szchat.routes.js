@@ -1,5 +1,5 @@
 import { FormularioPreRegistro } from "../controller/form.controller";
-import { consultarCedula, GenaradorPdrQR, listarRegistroTickets } from "../controller/pdf.controller";
+import { consultarCedula, editarTicket, eliminarTicket, GenaradorPdrQR, listarRegistroTickets } from "../controller/pdf.controller";
 
 
 const routes = [
@@ -53,6 +53,32 @@ const routes = [
             }
         },
         handler: listarRegistroTickets
+    },
+    {
+        path: '/api/v1/szchat/eliminar/:id',
+        method: 'DELETE',
+        schema: {
+            params: {
+                type: 'object',
+                properties: {
+                    id: { type: 'string' }
+                }
+            }
+        },
+        handler: eliminarTicket
+    },
+    {
+        path: '/api/v1/szchat/editar/:id',
+        method: 'PUT',
+        schema: {
+            params: {
+                type: 'object',
+                properties: {
+                    id: { type: 'string' }
+                }
+            }
+        },
+        handler: editarTicket
     }
 ]
 

@@ -86,3 +86,37 @@ export const listarRegistroTickets = async (req, reply) => {
         })
     }
 }
+
+export const eliminarTicket = async (req, reply) => {
+    try {
+        const { id } = req.params
+        let query = `DELETE FROM generados_tickets WHERE id = '${id}'`;
+        await conexion.query(query)
+        reply.send({
+            success: true,
+            message: "Eliminado"
+        })
+    } catch (error) {
+        reply.send({
+            success: false,
+            message: "Error al eliminar"
+        })
+    }
+}
+
+export const editarTicket = async (req, reply) => {
+    try {
+        const { id } = req.params
+        let query = `UPDATE generados_tickets SET nombre = '${req.body.nombre}', cedula = '${req.body.cedula}', celular = '${req.body.celular}', protocol = '${req.body.protocol}', actual = '${req.body.actual}', nombreconcert = '${req.body.nombreconcert}', cuidadconcert = '${req.body.cuidadconcert}' WHERE id = '${id}'`;
+        await conexion.query(query)
+        reply.send({
+            success: true,
+            message: "Editado"
+        })
+    } catch (error) {
+        reply.send({
+            success: false,
+            message: "Error al editar"
+        })
+    }
+}
